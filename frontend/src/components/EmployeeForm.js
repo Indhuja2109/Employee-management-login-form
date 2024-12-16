@@ -91,32 +91,34 @@ const EmployeeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      // Proceed with form submission (e.g., API call)
-      axios
-        .post("https://employee-management-login-form.onrender.com", formData) // Adjust the URL to your backend endpoint
-        .then((response) => {
-          console.log("Employee added:", response.data); // Log success
-          alert("Form Submitted Successfully!");
-  
-          // Reset form fields after successful submission
-          setFormData({
-            firstName: "",
-            lastName: "",
-            employeeId: "",
-            email: "",
-            phoneNumber: "",
-            department: "",
-            dateOfJoining: "",
-            role: "",
-          });
-        })
-        .catch((error) => {
-          console.error("Error adding employee:", error); // Log error
-          alert("There was an error submitting the form.");
+    // Validate the form before submitting
+  if (validateForm()) {
+    // Proceed with form submission (e.g., API call)
+    axios
+      .post("https://employee-management-login-form.onrender.com", formData) // Adjust the URL to your backend endpoint
+      .then((response) => {
+        console.log("Employee added:", response.data); // Log success
+        alert("Form Submitted Successfully!");
+
+        // Reset form fields and errors after successful submission
+        setFormData({
+          firstName: "",
+          lastName: "",
+          employeeId: "",
+          email: "",
+          phoneNumber: "",
+          department: "",
+          dateOfJoining: "",
+          role: "",
         });
-    }
-  };
+        setFormErrors({}); // Reset errors as well
+      })
+      .catch((error) => {
+        console.error("Error adding employee:", error); // Log error
+        alert("There was an error submitting the form.");
+      });
+  }
+};
   
 
   return (
