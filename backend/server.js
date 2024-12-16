@@ -9,7 +9,19 @@ require("dotenv").config(); // Load environment variables from .env file
 const app = express();
 
 // Enable CORS to allow requests from your frontend
-app.use(cors());
+const allowedOrigins = ['https://employee-management-login-form.netlify.app'];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    }
+  })
+);
 
 // Middleware to parse incoming JSON data
 app.use(bodyParser.json());
