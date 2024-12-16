@@ -94,7 +94,7 @@ const EmployeeForm = () => {
     if (validateForm()) {
       // Proceed with form submission (e.g., API call)
       axios
-        .post("https://employee-management-login-form.onrender.com/api/employees", formData) // Adjust the URL to your backend endpoint
+        .post("https://employee-management-login-form.onrender.com", formData) // Adjust the URL to your backend endpoint
         .then((response) => {
           console.log("Employee added:", response.data); // Log success
           alert("Form Submitted Successfully!");
